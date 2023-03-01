@@ -1,55 +1,67 @@
 @extends('students.layout')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Edit Student</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('students.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-<form action="{{ route('students.update',$student->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" value="{{ $student->name }}" class="form-control" placeholder="Name">
+    <div class="container">
+        <h1>Edit Student</h1>
+        <hr>
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="{{ route('students.index') }}"> Back</a>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Email:</strong>
-                <input type="email" name="email" value="{{ $student->email }}" class="form-control" placeholder="Email">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Phone:</strong>
-                <input type="text" name="phone" value="{{ $student->phone }}" class="form-control" placeholder="Phone">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
+        @endif
 
-</form>
+        <form method="POST" action="{{ route('students.update', $student->id) }}">
+            @csrf
+            @method('PUT')
+
+            <div class="form-group">
+                <label for="student_lrn">LRN</label>
+                <input type="text" class="form-control" id="student_lrn" name="student_lrn" value="{{ $student->student_lrn }}">
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $student->first_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="middle_name">Middle Name</label>
+                <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ $student->middle_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ $student->last_name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ $student->age }}">
+            </div>
+
+            <div class="form-group">
+                <label for="year_level">Year Level</label>
+                <input type="text" class="form-control" id="year_level" name="year_level" value="{{ $student->year_level }}">
+            </div>
+
+            <div class="form-group">
+                <label for="section">Section</label>
+                <input type="text" class="form-control" id="section" name="section" value="{{ $student->section }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 @endsection

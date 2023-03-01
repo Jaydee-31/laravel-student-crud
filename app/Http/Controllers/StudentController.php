@@ -18,9 +18,13 @@ class StudentController extends Controller
         // If a search query is present, filter the results
         if ($request->input('search')) {
             $searchQuery = $request->input('search');
-            $students->where('name', 'LIKE', "%{$searchQuery}%")
-                ->orWhere('email', 'LIKE', "%{$searchQuery}%")
-                ->orWhere('phone', 'LIKE', "%{$searchQuery}%");
+            $students->where('student_lrn', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('first_name', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('middle_name', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('last_name', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('age', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('year_level', 'LIKE', "%{$searchQuery}%")
+                ->orWhere('section', 'LIKE', "%{$searchQuery}%");
         }
 
         $students = $students->paginate(10);
@@ -43,9 +47,13 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:students',
-            'phone' => 'required'
+            'student_lrn' => 'required|string|max:12|unique:students,student_lrn',
+            'first_name' => 'required|string|max:30',
+            'middle_name' => 'nullable|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'age' => 'required|integer',
+            'year_level' => 'required|string|max:15',
+            'section' => 'required|string|max:30'
         ]);
     
         Student::create($request->all());
@@ -70,9 +78,13 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:students,email,'.$student->id,
-            'phone' => 'required'
+            'student_lrn' => 'required|string|max:12|unique:students,student_lrn,' .$student->id,
+            'first_name' => 'required|string|max:30',
+            'middle_name' => 'nullable|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'age' => 'required|integer',
+            'year_level' => 'required|string|max:15',
+            'section' => 'required|string|max:30'
         ]);
 
         $student->update($request->all());

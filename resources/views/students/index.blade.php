@@ -1,30 +1,31 @@
 @extends('students.layout')
 
 @section('content')
-
+<div class="container">
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Student CRUD</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('students.create') }}"> Create New Student</a>
-                
-            </div>
-            
-        </div>
+        <h1>Student CRUD</h1>
+        <hr>
+        <div class="row">
+                <div class="pull-left">
+                    <a class="btn btn-success" href="{{ route('students.create') }}"> Create New Student</a>
+                </div>
+        
+                <div class="pull-right">
+                    {{-- <form action="{{ route('students.index') }}" method="GET">
+                            <input type="text" name="search" id="search-input" class="form-control" placeholder="Search...">
+                            <button type="submit" class="btn btn-primary">Search<i class="fas fa-search"></i></button>
+                    </form> --}}
+        
+                    <form action="{{ route('students.index') }}" method="GET">
+                        <input type="text" name="search" placeholder="Search...">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+        </div><br>
     </div>
-
-    <div class="pull-right">
-        {{-- <form action="{{ route('students.index') }}" method="GET">
-                <input type="text" name="search" id="search-input" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-primary">Search<i class="fas fa-search"></i></button>
-        </form> --}}
-
-        <form action="{{ route('students.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Search...">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+    
+    <div class="row">
+        
     </div>
 
     @if ($message = Session::get('success'))
@@ -39,18 +40,26 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>LRN</th>
+                        <th>Firstname</th>
+                        <th>Middlename</th>
+                        <th>Lastname</th>
+                        <th>Age</th>
+                        <th>Year Level</th>
+                        <th>Section</th>
                         <th width="280px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td>{{ $student->name }}</td>
-                            <td>{{ $student->email }}</td>
-                            <td>{{ $student->phone }}</td>
+                            <td>{{ $student->student_lrn }}</td>
+                            <td>{{ $student->first_name }}</td>
+                            <td>{{ $student->middle_name }}</td>
+                            <td>{{ $student->last_name }}</td>
+                            <td>{{ $student->age }}</td>
+                            <td>{{ $student->year_level }}</td>
+                            <td>{{ $student->section }}</td>
                             <td>
                                 <form action="{{ route('students.destroy', $student->id) }}" method="POST">
                                     <a class="btn btn-info" href="{{ route('students.show', $student->id) }}">Show</a>
@@ -71,5 +80,5 @@
             <div class="align-self-center">Aligned flex item</div>
     
     @endif
-
+</div>
 @endsection
