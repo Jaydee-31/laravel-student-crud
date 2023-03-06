@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
         // Method 1 - Seed the users table using models
         \App\Models\User::factory(5)->create(); //10 random data
 
-        \App\Models\User::factory()->create([ //specific data
-            'name' => 'Test User 3',
-            'email' => 'test1212312312@example.com',
-        ]);
+        // \App\Models\User::factory()->create([ //specific data
+        //     'name' => 'Test User 3',
+        //     'email' => 'test1212312312@example.com',
+        // ]);
 
         // // Method 2 - Seed the reservations table with sample data using Facades DB
         // DB::table('users')->insert([
