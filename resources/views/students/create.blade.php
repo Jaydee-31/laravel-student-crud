@@ -1,11 +1,9 @@
 @extends('students.layout')
 @section('content')
 
-   <div class="container">
-
- 
+   <div class="container"> 
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
@@ -45,7 +43,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>LRN</strong>
-                                        <input type="text" name="student_lrn" class="form-control" placeholder="LRN" value="{{ old('student_lrn') }}" autofocus>
+                                        <input type="number" name="student_lrn" class="form-control" placeholder="LRN" value="{{ old('student_lrn') }}" autofocus>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="student_lrn">LRN</label>
-                <input type="text" class="form-control" id="student_lrn" name="student_lrn" value="{{ $student->student_lrn }}">
+                <input type="number" class="form-control" id="student_lrn" name="student_lrn" value="{{ $student->student_lrn }}">
             </div>
 
             <div class="form-group">
