@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 
@@ -14,6 +15,7 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $students = Student::query();
+        // $students = array("students" => DB::table('students')->orderBy('created_at', 'desc')->paginate(10));
 
         // If a search query is present, filter the results
         if ($request->input('search')) {
@@ -27,9 +29,10 @@ class StudentController extends Controller
                 ->orWhere('section', 'LIKE', "%{$searchQuery}%");
         }
 
-        $students = $students->paginate(10);
+        $students = $students->orderBy('created_at', 'desc')->paginate(5);
 
         return view('students.index', compact('students'));
+        // return view('students.index', $students);
     }
 
 
@@ -47,7 +50,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'student_lrn' => 'required|string|max:12|unique:students,student_lrn',
+            'student_lrn' => 'required|string|max:12|unique:students,student_lrn|regex:/^[0-9]{12}$/',
             'first_name' => 'required|string|max:30',
             'middle_name' => 'nullable|string|max:30',
             'last_name' => 'required|string|max:30',
@@ -78,7 +81,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'student_lrn' => 'required|string|max:12|unique:students,student_lrn,' .$student->id,
+            'student_lrn' => 'required|string|max:12|regex:/^[0-9]{12}$/|unique:students,student_lrn,' .$student->id,
             'first_name' => 'required|string|max:30',
             'middle_name' => 'nullable|string|max:30',
             'last_name' => 'required|string|max:30',
@@ -97,7 +100,7 @@ class StudentController extends Controller
     {
         $student->delete();
         return redirect()->route('students.index')
-            ->with('success','Student deleted successfully');
+            ->with('destroyed','Student deleted successfully');
 
     }
 }
