@@ -18,4 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::redirect('/', '/students');
+
+// Route::get('/', function () {
+//     return redirect()->route('students.index');
+// });
+
 Route::resource('students', StudentController::class);

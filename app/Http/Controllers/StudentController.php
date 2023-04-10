@@ -29,7 +29,7 @@ class StudentController extends Controller
                 ->orWhere('section', 'LIKE', "%{$searchQuery}%");
         }
 
-        $students = $students->orderBy('created_at', 'desc')->paginate(8);
+        $students = $students->orderBy('created_at', 'desc')->paginate(5);
 
         return view('students.index', compact('students'));
         // return view('students.index', $students);
@@ -50,7 +50,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'student_lrn' => 'required|string|max:12|unique:students,student_lrn',
+            'student_lrn' => 'required|string|max:12|unique:students,student_lrn|regex:/^[0-9]{12}$/',
             'first_name' => 'required|string|max:30',
             'middle_name' => 'nullable|string|max:30',
             'last_name' => 'required|string|max:30',
@@ -81,7 +81,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'student_lrn' => 'required|string|max:12|unique:students,student_lrn,' .$student->id,
+            'student_lrn' => 'required|string|max:12|regex:/^[0-9]{12}$/|unique:students,student_lrn,' .$student->id,
             'first_name' => 'required|string|max:30',
             'middle_name' => 'nullable|string|max:30',
             'last_name' => 'required|string|max:30',

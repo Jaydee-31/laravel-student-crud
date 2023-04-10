@@ -1,23 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <title>Student CRUD</title>
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> CRUD | @yield('title')</title>
+   <!-- Scripts -->
+   @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- Include app.js to enable vite -->
+   {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  @vite('resources/css/app.css') --}}
 </head>
 <body>
+    <div class="min-w-screen min-h-screen gris bg-gray-50 dark:bg-slate-900 px-3 py-5">
+    
+				<header class="text-center">
+					<div class="max-w-7xl mx-auto pt-4 mt-4 px-4 sm:px-6 lg:px-8">
+                        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        @yield('header')
+                        </h2>
+					</div>
+				</header>
+		
 
-<div class="container">
-    @yield('content')
-</div>
-
+			<!-- Page Content -->
+			<main>
+				@yield('content')
+			</main>
+	</div>
+    {{-- <div class="min-w-screen min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center px-3 py-5">
+        @yield('content')
+    </div> --}}
+    
 </body>
 <script>
     $(document).ready(function() {
